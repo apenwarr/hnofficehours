@@ -2,7 +2,13 @@
   <div>
   {% with office_hour.event.creator as user %}
     <h3><a href="{% url view_profile user.username %}"><em>{{ user.username }}</em></a></h3>
-    <p>From {{ office_hour.start }} to {{ office_hour.end }}</p>
+    {% if office_hour.start.date == office_hour.end.date %}
+        <p>{{ office_hour.start.date }}
+             from {{ office_hour.start.time }}
+	       to {{ office_hour.end.time }}</p>
+    {% else %}
+        <p>From {{ office_hour.start }} to {{ office_hour.end }}</p>
+    {% endif %}
     <ul class="skill"><li>{{ user.get_profile.skills.all|join:"</li><li>" }}</li></ul>
   {% endwith %}
   </div>
