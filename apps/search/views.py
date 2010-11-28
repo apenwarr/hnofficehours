@@ -14,12 +14,12 @@ def search(request):
                 try:
                     qs = [list(chain(*[skill.profile_set.all() for skill in Skill.objects.filter(name__contains=tag_clean(qry))])) for qry in query_list]
                     results = list(set(qs[0]).intersection(*qs))
-                except Exception as e:
+                except Exception, e:
                     results = None
             else:
                 try:
                     results = list(chain(Skill.objects.get(name__contains=query_list[0]).profile_set.all()))
-                except Exception as e:
+                except Exception, e:
                     if e.__class__ == Skill.MultipleObjectsReturned:
                         results = list(chain(*[skill.profile_set.all() for skill in Skill.objects.filter(name__contains=query_list[0])]))
                     else:
