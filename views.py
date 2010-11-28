@@ -23,7 +23,15 @@ def site_index(request, template_name='index.html'):
     users = set(list(users_available_now) + users_holding_office_hours_now)
     future = Period(events=events, start=datetime.now(),
                     end=datetime.now() + timedelta(days=MAX_FUTURE_DAYS))
-    upcoming_office_hours = future.get_occurrences()
+    upcoming_office_hours = []
+    already_saw = {}
+    for i in future.get_occurrences():
+        if len(upcoming_office_hours) >= MAX_FUTURE_OFFICE_HOURS:
+            break
+        if already_saw.get(i.event.creator):
+            continue
+        upcoming_office_hours.append(i)
+        already_saw[i.event.creator] = 1
     upcoming_office_hours = upcoming_office_hours[:MAX_FUTURE_OFFICE_HOURS]
     return direct_to_template(request, template_name, locals())
 
