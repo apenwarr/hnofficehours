@@ -106,7 +106,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 
-    # third-party apps:
+    # third-party apps: (see deploy/requirements.txt)
     'ajax_select',
     'django_extensions',
     'schedule',
