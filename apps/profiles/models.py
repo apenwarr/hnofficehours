@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from tagging.fields import TagField
 from tagging.models import Tag
 from tagging_autocomplete.models import TagAutocompleteField
+from timezones.zones import PRETTY_TIMEZONE_CHOICES
 from timezones.fields import TimeZoneField
 
 class Profile(models.Model):
@@ -13,8 +14,8 @@ class Profile(models.Model):
     gchat = models.CharField("Google Chat", max_length=20, null=True, blank=True)
     phone = models.CharField("Phone number", max_length=20, null=True, blank=True)
     is_available = models.BooleanField("Available now")
-    timezone = TimeZoneField()
-
+    timezone = TimeZoneField(choices=sorted(PRETTY_TIMEZONE_CHOICES,
+                                        key=lambda x: (int(x[1][4:9]), x[1])))
     skills = models.ManyToManyField('Skill', blank=True)
     def __unicode__(self):
         return unicode(self.user)
