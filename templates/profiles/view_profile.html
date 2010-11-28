@@ -21,6 +21,8 @@
   </h1>
   {% if display_full_profile %}
     {% with user.get_profile as profile %}
+      <p><label>hn profile:</label> <a
+      href="http://news.ycombinator.com/user?id={{ user.username }}">{{ user.username }}</a></p>
       <p><label>skype:</label> {{ profile.skype }}
       {% if profile.skype %}
 <a class="skype" href="skype:{{ profile.skype }}?call"><img src="http://mystatus.skype.com/bigclassic/{{ profile.skype }}" style="border: none;" width="182" height="44" alt="My status" /></a>
