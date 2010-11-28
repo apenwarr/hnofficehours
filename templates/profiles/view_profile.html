@@ -40,7 +40,7 @@
     {% for skill in user.get_profile.skills.all %}
       <li>{{ skill }}</li>
     {% empty %}
-      <li>{{ user.username }} has not listed his skills</li>
+      <li>{{ user.username }} has not listed any skills</li>
     {% endfor %}
     </ul>
   <br />
